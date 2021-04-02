@@ -37,7 +37,7 @@ const studentRegistration = async (req, res) => {
     enrollmentID: login,
     enrollmentSecret: password,
     role: 'peer',
-    affiliation: 'naukma.student',
+    affiliation: 'org1.student',
     maxEnrollments: -1,
   }, admin);
   const userData = await ca.enroll({
