@@ -9,7 +9,7 @@ const studentRegistration = async (req, res) => {
     const ca = getCA();
     const adminData = await ca.enroll({ enrollmentID: 'admin', enrollmentSecret: 'password' });
     const mixin = X509WalletMixin.createIdentity(
-      'Org1',
+      'Org1MSP',
       adminData.certificate,
       adminData.key.toBytes()
     );
