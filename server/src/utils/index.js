@@ -22,7 +22,7 @@ export const getConnectedWallet = async (label, mixin) => {
   const connectionOptions = {
     identity: label,
     wallet,
-    discovery: { enabled: false, asLocalhost: true },
+    discovery: { enabled: true, asLocalhost: true },
   };
   await gateway.connect(connectionProfile, connectionOptions);
   return gateway;
@@ -40,5 +40,22 @@ export const registerUser = async (ca, adminWallet, userData) => {
   catch (e) {
     console.error(e.message)
     throw new Error(e.message);
+  }
+}
+
+export const sendTransaction = async(gateway, transaction) => {
+  try {
+    // console.log(await gateway.getChannel())
+
+    const network = await gateway.getNetwork('testchannel');
+    const contract = await network.getContract('recordcontract',
+      'org.fabric.studentRecordsStorage');
+    const issueResponse = await contract.submitTransaction(transaction.name, ...transaction.props);
+    return JSON.parse(issueResponse.toString());
+  }
+  catch (error) {
+    console.log(`Error processing transaction. ${error.stack}`);
+    gateway.disconnect();
+    return null;
   }
 }

@@ -10,8 +10,7 @@ class StudentRecordsStorage extends Contract {
 
   async createStudentRecord(ctx) {
     const identity = new ClientIdentity(ctx.stub);
-    console.log(JSON.stringify(identity, null, 2))
-    console.log(JSON.stringify(identity.cert, null, 2))
+
 
   }
 }
