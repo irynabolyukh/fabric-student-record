@@ -80,14 +80,14 @@ organizations:
 #
 orderers:
   orderer_n1:
-    url: grpc://192.168.88.88:7050
+    url: grpc://0.0.0.0:7050
 
     # these are standard properties defined by the gRPC library
     # they will be passed in as-is to gRPC client constructor
     grpcOptions:
       ssl-target-name-override: orderer_n1
     tlsCACerts:
-      path: ../../../network/crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
+      path: ../network/crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
 
 #
 # List of peers to send various requests to, including endorsement, query
@@ -96,13 +96,13 @@ orderers:
 peers:
   peer0.org1.example.com:
     # this URL is used to send endorsement and query requests
-    url: grpc://192.168.88.88:7051
+    url: grpc://0.0.0.0:7051
 
     grpcOptions:
       ssl-target-name-override: peer0.org1.example.com
       request-timeout: 120001
     tlsCACerts:
-      path: ../../../network/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/msp/tlscacerts/tlsca.org1.example.com-cert.pem
+      path: ../network/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/msp/tlscacerts/tlsca.org1.example.com-cert.pem
 
 # Fabric-CA is a special kind of Certificate Authority provided by Hyperledger Fabric which allows
 # certificate management to be done via REST APIs. Application may choose to use a standard
@@ -110,7 +110,7 @@ peers:
 #
 certificateAuthorities:
   ca-org1:
-    url: http://192.168.88.88:7054
+    url: http://0.0.0.0:7054
     # the properties specified under this object are passed to the 'http' client verbatim when
     # making the request to the Fabric-CA server
     httpOptions:
