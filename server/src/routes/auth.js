@@ -9,11 +9,11 @@ const studentRegistration = async (req, res) => {
     const ca = getCA();
     const adminData = await ca.enroll({ enrollmentID: 'admin', enrollmentSecret: 'password' });
     const mixin = X509WalletMixin.createIdentity(
-      'Org1MSP',
+      'Org1',
       adminData.certificate,
       adminData.key.toBytes()
     );
-    const gateway = await getConnectedWallet('client', mixin);
+    const gateway = await getConnectedWallet('Org1MSP', mixin);
     const admin = await gateway.getCurrentIdentity()
     await registerUser(ca, admin, { login, password, affiliation: 'student' });
 

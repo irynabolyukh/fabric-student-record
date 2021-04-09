@@ -67,9 +67,8 @@ channels:
 # list of participating organizations in this network
 #
 organizations:
-  Org1:
-    mspid: Org1
-
+  Org1MSP:
+    mspid: Org1MSP
     peers:
       - peer0.org1.example.com
 
@@ -80,13 +79,28 @@ organizations:
 #
 orderers:
   orderer_n1:
-    url: grpc://0.0.0.0:7050
-
+    url: grpc://192.168.88.85:7050
+    "tlsCACerts":
+      "pem": |
+        -----BEGIN CERTIFICATE-----
+        MIICVzCCAf2gAwIBAgIQMgm0fjz4rB+98u8oxSjDRDAKBggqhkjOPQQDAjB2MQsw
+        CQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy
+        YW5jaXNjbzEZMBcGA1UEChMQb3JnMS5leGFtcGxlLmNvbTEfMB0GA1UEAxMWdGxz
+        Y2Eub3JnMS5leGFtcGxlLmNvbTAeFw0yMTA0MDkyMDA5MDBaFw0zMTA0MDcyMDA5
+        MDBaMHYxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQH
+        Ew1TYW4gRnJhbmNpc2NvMRkwFwYDVQQKExBvcmcxLmV4YW1wbGUuY29tMR8wHQYD
+        VQQDExZ0bHNjYS5vcmcxLmV4YW1wbGUuY29tMFkwEwYHKoZIzj0CAQYIKoZIzj0D
+        AQcDQgAEXy9jdYsUOIqp+Oh6va+zOWz86V2G12bJxMuTU3M/apyD2sFr/LKHaJFH
+        xs9ZNt3CCxR3yzKIZe3+Mu9TyjNj26NtMGswDgYDVR0PAQH/BAQDAgGmMB0GA1Ud
+        JQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDATAPBgNVHRMBAf8EBTADAQH/MCkGA1Ud
+        DgQiBCCX75+3cdq0QWzcknD3o4bbsHIrQIqvOZqvx42ncnyHNjAKBggqhkjOPQQD
+        AgNIADBFAiEAlYyTxjIJCWA1AuAgJk1Gsp5o0uuPoCYex2GPY0h7VU8CIBHPE4UM
+        V0cf6nIKi/GPtzb414i/rRKs3mTsDJX+WdAQ
+        -----END CERTIFICATE-----
     # these are standard properties defined by the gRPC library
     # they will be passed in as-is to gRPC client constructor
     grpcOptions:
       ssl-target-name-override: orderer_n1
-    tlsCACerts:
 
 #
 # List of peers to send various requests to, including endorsement, query
@@ -95,7 +109,24 @@ orderers:
 peers:
   peer0.org1.example.com:
     # this URL is used to send endorsement and query requests
-    url: grpc://0.0.0.0:7051
+    url: grpcs://192.168.88.85:7051
+    "tlsCACerts":
+      "pem": |
+        -----BEGIN CERTIFICATE-----
+        MIICVzCCAf2gAwIBAgIQMgm0fjz4rB+98u8oxSjDRDAKBggqhkjOPQQDAjB2MQsw
+        CQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy
+        YW5jaXNjbzEZMBcGA1UEChMQb3JnMS5leGFtcGxlLmNvbTEfMB0GA1UEAxMWdGxz
+        Y2Eub3JnMS5leGFtcGxlLmNvbTAeFw0yMTA0MDkyMDA5MDBaFw0zMTA0MDcyMDA5
+        MDBaMHYxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQH
+        Ew1TYW4gRnJhbmNpc2NvMRkwFwYDVQQKExBvcmcxLmV4YW1wbGUuY29tMR8wHQYD
+        VQQDExZ0bHNjYS5vcmcxLmV4YW1wbGUuY29tMFkwEwYHKoZIzj0CAQYIKoZIzj0D
+        AQcDQgAEXy9jdYsUOIqp+Oh6va+zOWz86V2G12bJxMuTU3M/apyD2sFr/LKHaJFH
+        xs9ZNt3CCxR3yzKIZe3+Mu9TyjNj26NtMGswDgYDVR0PAQH/BAQDAgGmMB0GA1Ud
+        JQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDATAPBgNVHRMBAf8EBTADAQH/MCkGA1Ud
+        DgQiBCCX75+3cdq0QWzcknD3o4bbsHIrQIqvOZqvx42ncnyHNjAKBggqhkjOPQQD
+        AgNIADBFAiEAlYyTxjIJCWA1AuAgJk1Gsp5o0uuPoCYex2GPY0h7VU8CIBHPE4UM
+        V0cf6nIKi/GPtzb414i/rRKs3mTsDJX+WdAQ
+        -----END CERTIFICATE-----
 
     grpcOptions:
       ssl-target-name-override: peer0.org1.example.com
@@ -107,7 +138,7 @@ peers:
 #
 certificateAuthorities:
   ca-org1:
-    url: http://0.0.0.0:7054
+    url: http://192.168.88.85:7054
     # the properties specified under this object are passed to the 'http' client verbatim when
     # making the request to the Fabric-CA server
     httpOptions:
