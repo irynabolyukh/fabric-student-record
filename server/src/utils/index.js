@@ -50,6 +50,7 @@ export const sendTransaction = async(gateway, transaction) => {
       'org.fabric.studentRecordsStorage');
     const issueResponse = await contract.submitTransaction(transaction.name, ...transaction.props);
     return JSON.parse(issueResponse.toString());
+    // return true;
   }
   catch (error) {
     console.log(`Error processing transaction. ${error.stack}`);

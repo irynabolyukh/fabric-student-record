@@ -39,7 +39,7 @@ channels:
     # operational decisions to share loads from applications among the orderers.  The values must
     # be "names" of orgs defined under "organizations/peers"
     orderers:
-      - orderer
+      - orderer.example.com
 
     # Required. list of peers from participating orgs
     peers:
@@ -78,29 +78,30 @@ organizations:
 # SDK is implementation specific. Consult each SDK's documentation for its handling of orderers.
 #
 orderers:
-  orderer_n1:
-    url: grpc://192.168.88.85:7050
-    "tlsCACerts":
-      "pem": |
-        -----BEGIN CERTIFICATE-----
-        MIICVzCCAf2gAwIBAgIQMgm0fjz4rB+98u8oxSjDRDAKBggqhkjOPQQDAjB2MQsw
-        CQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy
-        YW5jaXNjbzEZMBcGA1UEChMQb3JnMS5leGFtcGxlLmNvbTEfMB0GA1UEAxMWdGxz
-        Y2Eub3JnMS5leGFtcGxlLmNvbTAeFw0yMTA0MDkyMDA5MDBaFw0zMTA0MDcyMDA5
-        MDBaMHYxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQH
-        Ew1TYW4gRnJhbmNpc2NvMRkwFwYDVQQKExBvcmcxLmV4YW1wbGUuY29tMR8wHQYD
-        VQQDExZ0bHNjYS5vcmcxLmV4YW1wbGUuY29tMFkwEwYHKoZIzj0CAQYIKoZIzj0D
-        AQcDQgAEXy9jdYsUOIqp+Oh6va+zOWz86V2G12bJxMuTU3M/apyD2sFr/LKHaJFH
-        xs9ZNt3CCxR3yzKIZe3+Mu9TyjNj26NtMGswDgYDVR0PAQH/BAQDAgGmMB0GA1Ud
-        JQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDATAPBgNVHRMBAf8EBTADAQH/MCkGA1Ud
-        DgQiBCCX75+3cdq0QWzcknD3o4bbsHIrQIqvOZqvx42ncnyHNjAKBggqhkjOPQQD
-        AgNIADBFAiEAlYyTxjIJCWA1AuAgJk1Gsp5o0uuPoCYex2GPY0h7VU8CIBHPE4UM
-        V0cf6nIKi/GPtzb414i/rRKs3mTsDJX+WdAQ
-        -----END CERTIFICATE-----
+  orderer.example.com:
+    url: grpcs://192.168.88.85:7050
     # these are standard properties defined by the gRPC library
     # they will be passed in as-is to gRPC client constructor
+    tlsCACerts:
+      pem: |
+        -----BEGIN CERTIFICATE-----
+        MIICRDCCAeqgAwIBAgIRAOlpSSH8njFZb3K9eUZ2AfwwCgYIKoZIzj0EAwIwbDEL
+        MAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG
+        cmFuY2lzY28xFDASBgNVBAoTC2V4YW1wbGUuY29tMRowGAYDVQQDExF0bHNjYS5l
+        eGFtcGxlLmNvbTAeFw0yMTA0MDkyMTUyMDBaFw0zMTA0MDcyMTUyMDBaMGwxCzAJ
+        BgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4gRnJh
+        bmNpc2NvMRQwEgYDVQQKEwtleGFtcGxlLmNvbTEaMBgGA1UEAxMRdGxzY2EuZXhh
+        bXBsZS5jb20wWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAARObm10VDeDJSK9wu85
+        UAvbqg4w3Tu6s3Em00qOArx32EWdMfa5XEF7Pu47ih4ncPieAmyVAXLvitzMfiNQ
+        9woio20wazAOBgNVHQ8BAf8EBAMCAaYwHQYDVR0lBBYwFAYIKwYBBQUHAwIGCCsG
+        AQUFBwMBMA8GA1UdEwEB/wQFMAMBAf8wKQYDVR0OBCIEIGT0A4Jr0v5RIkloRJrX
+        IHsX+qtTWr6msV12Y6bPeABaMAoGCCqGSM49BAMCA0gAMEUCIQD8k8jsc9MFsYdK
+        FUkF8HyhbXgWC9VXUzdENAxpgIdOHAIgUnidpZCOAt3O9Up0hEC2tOCdHcIMLTR+
+        em9jgcU46Kw=
+        -----END CERTIFICATE-----
+
     grpcOptions:
-      ssl-target-name-override: orderer_n1
+      ssl-target-name-override: orderer.example.com
 
 #
 # List of peers to send various requests to, including endorsement, query
@@ -113,19 +114,19 @@ peers:
     "tlsCACerts":
       "pem": |
         -----BEGIN CERTIFICATE-----
-        MIICVzCCAf2gAwIBAgIQMgm0fjz4rB+98u8oxSjDRDAKBggqhkjOPQQDAjB2MQsw
+        MIICVjCCAf2gAwIBAgIQDfHCgOBKptyRG4OID6pNdDAKBggqhkjOPQQDAjB2MQsw
         CQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy
         YW5jaXNjbzEZMBcGA1UEChMQb3JnMS5leGFtcGxlLmNvbTEfMB0GA1UEAxMWdGxz
-        Y2Eub3JnMS5leGFtcGxlLmNvbTAeFw0yMTA0MDkyMDA5MDBaFw0zMTA0MDcyMDA5
+        Y2Eub3JnMS5leGFtcGxlLmNvbTAeFw0yMTA0MDkyMTUyMDBaFw0zMTA0MDcyMTUy
         MDBaMHYxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQH
         Ew1TYW4gRnJhbmNpc2NvMRkwFwYDVQQKExBvcmcxLmV4YW1wbGUuY29tMR8wHQYD
         VQQDExZ0bHNjYS5vcmcxLmV4YW1wbGUuY29tMFkwEwYHKoZIzj0CAQYIKoZIzj0D
-        AQcDQgAEXy9jdYsUOIqp+Oh6va+zOWz86V2G12bJxMuTU3M/apyD2sFr/LKHaJFH
-        xs9ZNt3CCxR3yzKIZe3+Mu9TyjNj26NtMGswDgYDVR0PAQH/BAQDAgGmMB0GA1Ud
+        AQcDQgAEobO4XVzgQt5WEzoyWSsAWq/11HKuMYP3eDsInxn4+C/t9YOME36LkALe
+        sOfhQJMzA8a5GSlVjRSLCW5tmSs0IqNtMGswDgYDVR0PAQH/BAQDAgGmMB0GA1Ud
         JQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDATAPBgNVHRMBAf8EBTADAQH/MCkGA1Ud
-        DgQiBCCX75+3cdq0QWzcknD3o4bbsHIrQIqvOZqvx42ncnyHNjAKBggqhkjOPQQD
-        AgNIADBFAiEAlYyTxjIJCWA1AuAgJk1Gsp5o0uuPoCYex2GPY0h7VU8CIBHPE4UM
-        V0cf6nIKi/GPtzb414i/rRKs3mTsDJX+WdAQ
+        DgQiBCDiaKbL+LTkb/pjrVrPqJXXROL+vtrrVU04Fmn9JLy1LTAKBggqhkjOPQQD
+        AgNHADBEAiANZY3TVyDL4fSPs5rwN0ZxcFRdnl1nP16DMqeyB4dZwAIgQzWJXXOw
+        OPogeUshmqftxx5kdWs3/hL+bLcNM7mXizs=
         -----END CERTIFICATE-----
 
     grpcOptions:

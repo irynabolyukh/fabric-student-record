@@ -6,9 +6,9 @@ import path from 'path';
 
 const router = express.Router();
 const test = async (req, res) => {
-  // const { certificate, privateKey } = req.body;
-  const certificate = fs.readFileSync(path.resolve(__dirname, '../gateway/cert.pem'), 'utf8');
-  const privateKey = fs.readFileSync(path.resolve(__dirname, '../gateway/privateKey.pem'), 'utf8');
+  const { certificate, privateKey } = req.body;
+  // const certificate = fs.readFileSync(path.resolve(__dirname, '../gateway/cert.pem'), 'utf8');
+  // const privateKey = fs.readFileSync(path.resolve(__dirname, '../gateway/privateKey.pem'), 'utf8');
   console.log(certificate)
   console.log(privateKey)
   // const certificate = "-----BEGIN CERTIFICATE-----MIICKTCCAc+gAwIBAgIQTn6S2qGdc2v5QZDPCNk15TAKBggqhkjOPQQDAjBzMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzEZMBcGA1UEChMQb3JnMS5leGFtcGxlLmNvbTEcMBoGA1UEAxMTY2Eub3JnMS5leGFtcGxlLmNvbTAeFw0yMTA0MDkyMDA5MDBaFw0zMTA0MDcyMDA5MDBaMGsxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2NvMQ4wDAYDVQQLEwVhZG1pbjEfMB0GA1UEAwwWQWRtaW5Ab3JnMS5leGFtcGxlLmNvbTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABNnvug5vljzY4Lv++56mFILT/hIv5COA0fXGs/1Le7ZWhe0+LlOYCkyx74LosjJew55NU9t5pXqVWageufPXX2WjTTBLMA4GA1UdDwEB/wQEAwIHgDAMBgNVHRMBAf8EAjAAMCsGA1UdIwQkMCKAIMKW3AF+//QqKgHzNVIsNq4foUA5U7mjJ1WurlyRJcIpMAoGCCqGSM49BAMCA0gAMEUCIQD1Q+W54OgV2zwviCLx410c1Zt50oo7q+YdQb4FWEiDDgIgadx2hPJufDDeMoSbqFO8UrGey5q/veDBMJpDhc1NJOw=-----END CERTIFICATE-----";
@@ -29,9 +29,9 @@ const test = async (req, res) => {
     const gateway = await getConnectedWallet('Org1MSP', mixin);
     const result = await sendTransaction(gateway, {
       name: 'test',
-      props: ["20"],
+      props: ["198"],
     })
-    console.log(result)
+    res.status(200).json({ data: result });
     gateway.disconnect();
   }
   catch (e) {
