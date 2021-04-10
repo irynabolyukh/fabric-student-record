@@ -8,13 +8,9 @@ class StudentRecordsStorage extends Contract {
     super('org.fabric.studentRecordsStorage');
   }
 
-  async test(ctx, val) {
-    return +val * 2;
-  }
-
   async createStudentRecord(ctx, studentEmail, fullName) {
     const identity = new ClientIdentity(ctx.stub);
-    if (identity.cert.subject.organizationalUnitName !== 'admin') {
+    if (identity.cert.subject.organizationalUnitName !== 'teacher') {
       throw new Error('Current subject is not have access to this function');
     }
     const recordAsBytes = await ctx.stub.getState(studentEmail);
@@ -32,7 +28,7 @@ class StudentRecordsStorage extends Contract {
 
   async addSubjectToStudentRecord(ctx, studentEmail, semesterNumber, subjectName) {
     const identity = new ClientIdentity(ctx.stub);
-    if (identity.cert.subject.organizationalUnitName !== 'admin') {
+    if (identity.cert.subject.organizationalUnitName !== 'teacher') {
       throw new Error('Current subject is not have access to this function');
     }
     const recordAsBytes = await ctx.stub.getState(studentEmail);
