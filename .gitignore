@@ -2,6 +2,14 @@
 node_modules
 
 network/ca/msp
+cert.pem
+network/ca/IssuerPublicKey
+network/ca/IssuerRevocationPublicKey
+network/ca/fabric-ca-server.db
+network/channel-artifacts/Org1MSPanchors.tx
+network/channel-artifacts/channel.tx
+network/channel-artifacts/genesis.block
+network/.env
 
 network/crypto-config
 
