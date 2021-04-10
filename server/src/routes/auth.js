@@ -22,6 +22,7 @@ const studentRegistration = async (req, res) => {
       enrollmentSecret: password,
     });
     gateway.disconnect();
+    console.log(userData.certificate);
     res.status(201).json({
       login,
       certificate: userData.certificate,

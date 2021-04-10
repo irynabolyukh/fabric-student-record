@@ -1,2 +1,10 @@
 .idea
 node_modules
+
+network/ca/msp
+
+network/crypto-config
+
+bin
+config
+server/package-lock.json

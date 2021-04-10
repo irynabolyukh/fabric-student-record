@@ -8,7 +8,7 @@ class StudentRecordsStorage extends Contract {
     super('org.fabric.studentRecordsStorage');
   }
 
-  async createStudentRecord(ctx, studentEmail, fullName) {
+  async createStudentRecord(ctx, studentEmail, studentFullName) {
     const identity = new ClientIdentity(ctx.stub);
     if (identity.cert.subject.organizationalUnitName !== 'teacher') {
       throw new Error('Current subject is not have access to this function');
@@ -18,7 +18,7 @@ class StudentRecordsStorage extends Contract {
     //   throw new Error('Student with the current email already exist');
     // }
     const recordExample = {
-      fullName: fullName,
+      fullName: studentFullName,
       semesters: []
     }
     const newRecordInBytes = Buffer.from(JSON.stringify(recordExample));
@@ -40,6 +40,14 @@ class StudentRecordsStorage extends Contract {
     const newRecordInBytes = Buffer.from(JSON.stringify(recordAsObject));
     await ctx.stub.putState(studentEmail, newRecordInBytes);
     return JSON.stringify(recordAsObject, null, 2);
+  }
+
+  async getStudentData(ctx, studentEmail){
+    const recordAsBytes = await ctx.stub.getState(studentEmail);
+    if (!recordAsBytes || recordAsBytes.toString().length === 0) {
+      throw new Error("Student with this email does not exist.");
+    }
+    return recordAsBytes.toString();
   }
 }
 
