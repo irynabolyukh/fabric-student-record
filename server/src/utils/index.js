@@ -32,7 +32,7 @@ export const registerUser = async (ca, adminWallet, userData) => {
     await ca.register({
       enrollmentID: userData.login,
       enrollmentSecret: userData.password,
-      role: 'client',
+      role: 'admin',
       affiliation: `org1.${userData.affiliation}`,
       maxEnrollments: -1,
     }, adminWallet);

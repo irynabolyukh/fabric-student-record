@@ -23,4 +23,4 @@ services:
       - ../crypto-config/peerOrganizations/org1.example.com/tlsca/:/etc/hyperledger/fabric-ca-server-tls
     ports:
       - 7054:7054
-    command: "sh -c 'fabric-ca-server start -b admin:password -d"
+    command: "sh -c 'fabric-ca-server start -b admin:password -d'"
