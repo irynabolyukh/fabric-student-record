@@ -3,7 +3,7 @@ import { X509WalletMixin } from 'fabric-network';
 import { getCA, getConnectedWallet, registerUser } from '../utils';
 
 const router = express.Router();
-const studentRegistration = async (req, res) => {
+const registrationWithRole = async (req, res, affilation) => {
   const { login, password } = req.body;
   try {
     const ca = getCA();
@@ -15,7 +15,7 @@ const studentRegistration = async (req, res) => {
     );
     const gateway = await getConnectedWallet('Org1MSP', mixin);
     const admin = await gateway.getCurrentIdentity()
-    await registerUser(ca, admin, { login, password, affiliation: 'teacher' });
+    await registerUser(ca, admin, { login, password, affiliation: affilation });
 
     const userData = await ca.enroll({
       enrollmentID: login,
@@ -33,6 +33,15 @@ const studentRegistration = async (req, res) => {
     res.status(400).json({ message: e.message });
   }
 };
+
+const teacherRegistration = async (req, res) => {
+  return registrationWithRole(req, res, "teacher");
+}
+const studentRegistration = async (req, res) => {
+  return registrationWithRole(req, res, "student");
+}
+
+router.post('/teacher', teacherRegistration);
 router.post('/student', studentRegistration);
 
 export default router;
